@@ -37,8 +37,10 @@ button:disabled {
 }
 
 #coin {
-  width: 160px;        /* 好きなサイズでOK */
-  height: auto;        /* ← これが超重要 */
-  aspect-ratio: 1 / 1; /* 念のため */
+  width: 40vw;         /* 画面幅基準 */
+  max-width: 200px;    /* 大きくなりすぎ防止 */
+  aspect-ratio: 1 / 1;
+  height: auto;
   display: block;
 }
+
