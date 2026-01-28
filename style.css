@@ -1,32 +1,149 @@
+* { box-sizing: border-box; }
+
 body {
   margin: 0;
-  font-family: system-ui, sans-serif;
-  background: #111;
-  color: #fff;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: #0b0b0f;
+  color: #f5f5f7;
 }
 
-.container {
+.hidden { display: none !important; }
+
+.screen {
   min-height: 100vh;
+  padding: 18px 16px 24px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
 }
 
-button {
-  padding: 12px 24px;
+.title {
+  margin: 10px 0 4px;
+  letter-spacing: 0.12em;
+}
+
+.hint {
+  opacity: 0.7;
+  font-size: 12px;
+}
+
+.card {
+  width: min(420px, 92vw);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px;
+  padding: 14px;
+  background: rgba(255,255,255,0.04);
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 2px;
+  gap: 8px;
+}
+
+.label { opacity: 0.75; }
+.value { font-weight: 700; }
+
+.btnGrid {
+  width: min(420px, 92vw);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.btnRow {
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  width: min(420px, 92vw);
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.16);
+  background: rgba(255,255,255,0.06);
+  color: inherit;
   font-size: 16px;
-  border: none;
-  border-radius: 8px;
   cursor: pointer;
 }
 
-button:disabled {
-  opacity: 0.6;
+.btn:active { transform: translateY(1px); }
+
+.btn.primary {
+  border-color: rgba(255,255,255,0.28);
+  background: rgba(255,255,255,0.12);
+  font-weight: 700;
 }
 
-#coin.spinning {
+.btn.small {
+  width: auto;
+  padding: 8px 10px;
+  font-size: 14px;
+  border-radius: 10px;
+}
+
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.topbar {
+  width: min(520px, 96vw);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 10px;
+}
+
+.modeName {
+  text-align: center;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  opacity: 0.9;
+}
+
+.spacer { width: 44px; }
+
+.stats {
+  width: min(520px, 96vw);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.stat {
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px;
+  padding: 10px 12px;
+  background: rgba(255,255,255,0.04);
+}
+
+.statLabel { opacity: 0.75; font-size: 12px; }
+.statValue { font-size: 22px; font-weight: 900; margin-top: 4px; }
+
+.coinWrap {
+  width: min(520px, 96vw);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 0;
+}
+
+/* ★楕円化防止：必ず正方形表示にする */
+.coin {
+  width: min(220px, 62vw);
+  max-width: 260px;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* 回転 */
+.coin.spinning {
   animation: spin 0.12s linear infinite;
   transform-style: preserve-3d;
 }
@@ -36,11 +153,16 @@ button:disabled {
   to   { transform: rotateY(360deg); }
 }
 
-#coin {
-  width: 40vw;         /* 画面幅基準 */
-  max-width: 200px;    /* 大きくなりすぎ防止 */
-  aspect-ratio: 1 / 1;
-  height: auto;
-  display: block;
+/* 連勝でちょい豪華に見える（任意） */
+.coin.glow1 { filter: drop-shadow(0 0 10px rgba(255,255,255,0.15)); }
+.coin.glow2 { filter: drop-shadow(0 0 14px rgba(255,255,255,0.22)); }
+.coin.glow3 { filter: drop-shadow(0 0 18px rgba(255,255,255,0.30)); }
+
+.result {
+  margin: 0;
+  opacity: 0.9;
+  font-size: 16px;
+  text-align: center;
 }
+
 
