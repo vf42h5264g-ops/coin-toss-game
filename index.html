@@ -3,28 +3,118 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Coin Toss Game</title>
-
-  <!-- CSS -->
+  <title>Coin Toss</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <main class="container">
-    <h1>コイントス</h1>
+  <!-- =========================
+       START SCREEN
+  ========================== -->
+  <section id="startScreen" class="screen">
+    <h1 class="title">COIN TOSS</h1>
 
-    <!-- コイン表示 -->
-    <div class="coin-area">
-      <img id="coin" src="img/head.png" alt="coin" width="160" height="160" />
+    <div class="card">
+      <div class="row">
+        <span class="label">Title</span>
+        <span id="titleName" class="value">-</span>
+      </div>
+      <div class="row">
+        <span class="label">Title Points</span>
+        <span id="titlePoints" class="value">0</span>
+      </div>
+      <div class="row">
+        <span class="label">Daily Flip</span>
+        <span id="dailyStatus" class="value">-</span>
+      </div>
     </div>
 
-    <!-- 結果表示 -->
-    <p id="result">ボタンを押してね</p>
+    <div class="btnGrid">
+      <button id="btnQuick" class="btn primary">Quick Toss</button>
+      <button id="btnDaily" class="btn">Daily Flip</button>
+      <button id="btnChain" class="btn">Chain of Luck</button>
+    </div>
 
-    <!-- トスボタン -->
-    <button id="tossBtn">コイントス</button>
-  </main>
+    <p class="hint">画像：<code>img/head.png</code> と <code>img/tail.png</code> を使用</p>
+  </section>
 
-  <!-- JS -->
+  <!-- =========================
+       QUICK TOSS
+  ========================== -->
+  <section id="quickScreen" class="screen hidden">
+    <div class="topbar">
+      <button class="btn small" data-go="start">← Back</button>
+      <div class="modeName">Quick Toss</div>
+      <div class="spacer"></div>
+    </div>
+
+    <div class="coinWrap">
+      <img id="quickCoin" class="coin" src="img/head.png" alt="coin" />
+    </div>
+
+    <p id="quickResult" class="result">Tap to toss</p>
+
+    <button id="quickTossBtn" class="btn primary">TOSS</button>
+  </section>
+
+  <!-- =========================
+       DAILY FLIP
+  ========================== -->
+  <section id="dailyScreen" class="screen hidden">
+    <div class="topbar">
+      <button class="btn small" data-go="start">← Back</button>
+      <div class="modeName">Daily Flip</div>
+      <div class="spacer"></div>
+    </div>
+
+    <div class="coinWrap">
+      <img id="dailyCoin" class="coin" src="img/head.png" alt="coin" />
+    </div>
+
+    <p id="dailyMsg" class="result">Pick HEAD or TAIL</p>
+
+    <div class="btnRow">
+      <button id="dailyPickHead" class="btn">HEAD</button>
+      <button id="dailyPickTail" class="btn">TAIL</button>
+    </div>
+
+    <button id="dailyAgainBtn" class="btn small hidden">Back to Start</button>
+  </section>
+
+  <!-- =========================
+       CHAIN OF LUCK
+  ========================== -->
+  <section id="chainScreen" class="screen hidden">
+    <div class="topbar">
+      <button class="btn small" data-go="start">← Back</button>
+      <div class="modeName">Chain of Luck</div>
+      <div class="spacer"></div>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="statLabel">Current Streak</div>
+        <div id="chainStreak" class="statValue">0</div>
+      </div>
+      <div class="stat">
+        <div class="statLabel">Best Streak</div>
+        <div id="chainBest" class="statValue">0</div>
+      </div>
+    </div>
+
+    <div class="coinWrap">
+      <img id="chainCoin" class="coin" src="img/head.png" alt="coin" />
+    </div>
+
+    <p id="chainMsg" class="result">Pick HEAD or TAIL</p>
+
+    <div class="btnRow">
+      <button id="chainPickHead" class="btn">HEAD</button>
+      <button id="chainPickTail" class="btn">TAIL</button>
+    </div>
+
+    <button id="chainRestartBtn" class="btn small hidden">Restart</button>
+  </section>
+
   <script src="main.js"></script>
 </body>
 </html>
