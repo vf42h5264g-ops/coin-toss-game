@@ -36,3 +36,9 @@ button:disabled {
   to   { transform: rotateY(360deg); }
 }
 
+#coin {
+  width: 160px;        /* 好きなサイズでOK */
+  height: auto;        /* ← これが超重要 */
+  aspect-ratio: 1 / 1; /* 念のため */
+  display: block;
+}
