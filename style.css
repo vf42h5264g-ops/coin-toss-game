@@ -28,6 +28,7 @@ button:disabled {
 
 #coin.spinning {
   animation: spin 0.12s linear infinite;
+  transform-style: preserve-3d;
 }
 
 @keyframes spin {
