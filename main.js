@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // ====== DOM ======
+  // ===== DOM =====
   const coinImg = document.getElementById("coin");
   const tossBtn = document.getElementById("tossBtn");
   const resultEl = document.getElementById("result");
@@ -10,65 +10,57 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  // ====== 設定 ======
-  const STATE = {
-    isTossing: false,
-    lastResult: null, // "HEADS" | "TAILS"
-  };
-
-  // コイン画像（表裏）を分けたい場合は差し替えてOK
-  // 例: assets/heads.png と assets/tails.png を用意したらここを書き換え
+  // ===== 画像パス（←ここが今回の本体） =====
   const IMG = {
-    HEADS: "assets/coin.png",
-    TAILS: "assets/coin.png",
+    HEAD: "img/head.png",
+    TAIL: "img/tail.png",
   };
 
-  // ====== ユーティリティ ======
+  // 事前ロード（切替時のチラつき防止）
+  for (const key of Object.keys(IMG)) {
+    const im = new Image();
+    im.src = IMG[key];
+  }
+
+  // 初期表示：HEAD
+  let current = "HEAD";
+  coinImg.src = IMG[current];
+
+  let isTossing = false;
+
   function randomResult() {
-    return Math.random() < 0.5 ? "HEADS" : "TAILS";
+    return Math.random() < 0.5 ? "HEAD" : "TAIL";
   }
 
-  function toJapaneseLabel(r) {
-    return r === "HEADS" ? "表" : "裏";
-  }
-
-  function setUI({ disabled, text }) {
-    tossBtn.disabled = disabled;
-    tossBtn.textContent = text;
-  }
-
-  // ====== メイン動作 ======
   function toss() {
-    if (STATE.isTossing) return;
-    STATE.isTossing = true;
+    if (isTossing) return;
+    isTossing = true;
 
+    tossBtn.disabled = true;
+    tossBtn.textContent = "トス中…";
     resultEl.textContent = "トス中…";
-    setUI({ disabled: true, text: "トス中…" });
 
-    // 回転アニメ用クラス（style.css側で .spinning を定義してね）
     coinImg.classList.add("spinning");
 
-    // ここで結果を決める（最後に止まる）
     const r = randomResult();
-    STATE.lastResult = r;
-
-    // どれくらい回すか（ms）
     const duration = 1200;
 
     window.setTimeout(() => {
       coinImg.classList.remove("spinning");
 
-      // 画像切替（表裏画像を用意した人向け。今は同じcoin.pngでも動く）
-      coinImg.src = IMG[r];
+      current = r;
+      coinImg.src = IMG[current];
 
-      resultEl.textContent = `結果：${toJapaneseLabel(r)}`;
-      setUI({ disabled: false, text: "コイントス" });
+      // 表示テキスト（不要なら下の1行を消す or 空文字にしてOK）
+      resultEl.textContent = `結果：${current}`;
 
-      STATE.isTossing = false;
+      tossBtn.disabled = false;
+      tossBtn.textContent = "コイントス";
+      isTossing = false;
     }, duration);
   }
 
-  // ====== イベント ======
   tossBtn.addEventListener("click", toss);
 });
+
 
